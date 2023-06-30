@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { sampleProducts } from "../data";
 import { Product } from "../types/Product";
 import { useEffect, useReducer } from "react";
@@ -7,6 +6,7 @@ import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import ProductItem from "../components/ProductItem";
 
 type State = {
   products: Product[];
@@ -67,11 +67,7 @@ export default function HomePage() {
           {sampleProducts.map((product) => (
             <li className="flex flex-col" key={product.slug}>
               <div className="max-w-[400px] w-full mt-7">
-                <Link to={"/product/" + product.slug}>
-                  <img src={product.image} alt={product.name} />
-                  <h1 className="font-bold mt-2 text-xl">{product.name}</h1>
-                  <p>${product.price}</p>
-                </Link>
+                <ProductItem product={product} />
               </div>
             </li>
           ))}

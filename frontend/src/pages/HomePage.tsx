@@ -21,7 +21,7 @@ export default function HomePage() {
           <Helmet>
             <title>Brechola</title>
           </Helmet>
-          {sampleProducts!.map((product) => (
+          {products!.map((product) => (
             <li className="flex flex-col" key={product.slug}>
               <div className="max-w-[400px] w-full mt-7">
                 <ProductItem product={product} />

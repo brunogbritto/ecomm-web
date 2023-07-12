@@ -25,7 +25,7 @@ export default function ThemeSwitcher() {
   };
   return (
     <button onClick={handleThemeSwitch} className="">
-      {theme === "dark" ? <FaMoon /> : <BsSunFill />}
+      {theme === "dark" ? <BsSunFill /> : <FaMoon />}
     </button>
   );
 }

@@ -1,8 +1,29 @@
 import { Link } from "react-router-dom";
 import { Product } from "../types/Product";
 import Rating from "../components/Rating";
+import { Store } from "../Store";
+import { useContext } from "react";
+import { CartItem } from "../types/Cart";
+import { convertProductToCartItem } from "../utils";
 
 function ProductItem({ product }: { product: Product }) {
+  const { state, dispatch } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
+  const addToCartHandler = (item: CartItem) => {
+    const existItem = cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product.countInStock < quantity) {
+      alert("Sorry. Product is out of stock.");
+      return;
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantity },
+    });
+  };
   return (
     <div>
       <Link to={`/product/${product.slug}`}>
@@ -21,7 +42,10 @@ function ProductItem({ product }: { product: Product }) {
             Indisponível
           </button>
         ) : (
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-3">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-3"
+            onClick={() => addToCartHandler(convertProductToCartItem(product))}
+          >
             Adicione ao carrinho
           </button>
         )}

@@ -1,11 +1,14 @@
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductDetailsBySlugQuery } from "../hooks/productHooks";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { ApiError } from "../types/ApiError";
-import { getError } from "../utils";
+import { convertProductToCartItem, getError } from "../utils";
 import Rating from "../components/Rating";
+import { Store } from "../Store";
+import { useContext } from "react";
+import { toast } from "react-toastify";
 
 export default function ProductPage() {
   const params = useParams();
@@ -15,6 +18,26 @@ export default function ProductPage() {
     isLoading,
     error,
   } = useGetProductDetailsBySlugQuery(slug!);
+
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  const navigate = useNavigate();
+
+  const addToCartHandler = () => {
+    const existItem = cart.cartItems.find((x) => x._id === product!._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product!.countInStock < quantity) {
+      toast.warn("Desculpe, não há estoque para este produto.");
+      return;
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...convertProductToCartItem(product!), quantity },
+    });
+    toast.success("O produto foi adicionado ao carrinho.");
+    navigate("/cart");
+  };
 
   return isLoading ? (
     <LoadingBox />
@@ -69,7 +92,10 @@ export default function ProductPage() {
             <div>
               {product.countInStock > 0 && (
                 <div>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-3">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-3"
+                    onClick={addToCartHandler}
+                  >
                     Adicione ao carrinho
                   </button>
                 </div>

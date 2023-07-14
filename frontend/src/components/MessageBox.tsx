@@ -10,9 +10,15 @@ const MessageBox = ({ variant, children }: MessageBoxProps) => {
 
   useEffect(() => {
     setIsVisible(true);
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 3000); // Defina o tempo de exibição do toast aqui (por exemplo, 3 segundos)
+
+    return () => clearTimeout(timer);
   }, []);
 
-  let classes = "px-4 py-2 rounded opacity-0 transition-opacity duration-500";
+  let classes =
+    "px-4 py-2 rounded opacity-0 transition-opacity duration-500 fixed bottom-28 left-1/2 transform -translate-x-1/2";
 
   // Aplicar classes de acordo com a variante fornecida
   if (variant === "success") {
@@ -28,7 +34,7 @@ const MessageBox = ({ variant, children }: MessageBoxProps) => {
   }
 
   if (isVisible) {
-    classes += " animate-fade-in opacity-100";
+    classes += " opacity-100";
   }
 
   return <div className={classes}>{children}</div>;

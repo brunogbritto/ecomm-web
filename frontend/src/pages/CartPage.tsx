@@ -31,6 +31,12 @@ export default function CartPage() {
       payload: { ...item, quantity },
     });
   };
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=/shipping");
+  };
+  const removeItemHandler = (item: CartItem) => {
+    dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
   return (
     <div>
       <Helmet>
@@ -54,9 +60,14 @@ export default function CartPage() {
             <div className="w-5/5 md:w-1/5 sm:space-x-2 md:space-x-4"></div>
           </div>
           {cartItems.length === 0 ? (
-            <MessageBox variant="info">
-              O carrinho está vazio. <Link to="/">Veja mais produtos</Link>
-            </MessageBox>
+            <div className="bg-gray-200 border-l-2 py-2 px-4 rounded-lg text-gray-700 font-semibold cursor-not-allowed mt-3">
+              O carrinho está vazio.{" "}
+              <Link to="/">
+                <span className="text-blue-950 underline">
+                  Veja mais produtos.
+                </span>
+              </Link>
+            </div>
           ) : (
             cartItems.map((item: CartItem) => (
               <div
@@ -79,7 +90,7 @@ export default function CartPage() {
                   <span>{item.quantity}</span>
                   <button
                     onClick={() => updateCartHandler(item, item.quantity + 1)}
-                    disabled={item.quantity === 1}
+                    disabled={item.quantity === item.countInStock}
                   >
                     <FontAwesomeIcon icon={faPlusCircle} />
                   </button>{" "}
@@ -87,8 +98,8 @@ export default function CartPage() {
                 <div className="w-1/5 sm:space-x-2 md:space-x-2]">
                   {item.price}
                 </div>
-                <div className="w-5/5 pl-2 sm:space-x-2 md:space-x-2">
-                  <button>
+                <div className="w-5/5 pl-1 sm:space-x-2 md:space-x-2">
+                  <button onClick={() => removeItemHandler(item)}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                   </button>
                 </div>
@@ -102,6 +113,12 @@ export default function CartPage() {
             ({cartItems.reduce((a, c) => a + c.quantity, 0)}
             {""} itens)
           </p>
+          <button onClick={checkoutHandler} disabled={cartItems.length === 0}>
+            {" "}
+            <div className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-3">
+              Finalizar compra
+            </div>
+          </button>
         </div>
       </div>
     </div>

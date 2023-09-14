@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const {
     state: { cart },
-    dispatch,
   } = useContext(Store);
   return (
     <nav className="bg-gray-800 dark:bg-slate-200 w-screen">

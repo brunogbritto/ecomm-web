@@ -17,7 +17,7 @@ function ProductItem({ product }: { product: Product }) {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product.countInStock < quantity) {
-      alert("Sorry. Product is out of stock.");
+      toast.warn("Desculpe, não há este produto em estoque.");
       return;
     }
     dispatch({

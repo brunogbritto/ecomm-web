@@ -1,4 +1,6 @@
-import { Product } from "./types/Product";
+import { User } from "./models/userModel";
+import { Product } from "./models/productModel";
+import bcrypt from "bcryptjs";
 
 export const sampleProducts: Product[] = [
   {
@@ -12,6 +14,7 @@ export const sampleProducts: Product[] = [
     rating: 4.8,
     numReviews: 17,
     description: "high quality shirt",
+    isFeatured: true,
   },
   {
     name: "Adidas Slim shirt",
@@ -24,6 +27,7 @@ export const sampleProducts: Product[] = [
     rating: 4.5,
     numReviews: 10,
     description: "high quality shirt",
+    isFeatured: true,
   },
   {
     name: "Lacoste Slim shirt",
@@ -36,6 +40,7 @@ export const sampleProducts: Product[] = [
     rating: 3.5,
     numReviews: 2,
     description: "high quality shirt",
+    isFeatured: true,
   },
   {
     name: "Fila Slim shirt",
@@ -48,5 +53,21 @@ export const sampleProducts: Product[] = [
     rating: 5.0,
     numReviews: 20,
     description: "high quality shirt",
+    isFeatured: true,
+  },
+];
+
+export const sampleUsers: User[] = [
+  {
+    name: "Bruno",
+    email: "bruno@brechola.com.br",
+    password: bcrypt.hashSync("123456"),
+    isAdmin: true,
+  },
+  {
+    name: "Bruna",
+    email: "bruna@brechola.com.br",
+    password: bcrypt.hashSync("123456"),
+    isAdmin: false,
   },
 ];

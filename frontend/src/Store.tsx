@@ -1,11 +1,16 @@
 import { Cart, CartItem } from "./types/Cart";
 import React from "react";
+import { UserInfo } from "./types/UserInfo";
 
 type AppState = {
   cart: Cart;
+  userInfo?: UserInfo;
 };
 
 const initialState: AppState = {
+  userInfo: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo")!)
+    : null,
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems")!)
@@ -25,7 +30,8 @@ const initialState: AppState = {
 
 type Action =
   | { type: "CART_ADD_ITEM"; payload: CartItem }
-  | { type: "CART_REMOVE_ITEM"; payload: CartItem };
+  | { type: "CART_REMOVE_ITEM"; payload: CartItem }
+  | { type: "USER_SIGNIN"; payload: UserInfo };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -51,6 +57,9 @@ function reducer(state: AppState, action: Action): AppState {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
+    case "USER_SIGNIN":
+      return { ...state, userInfo: action.payload };
 
     default:
       return state;

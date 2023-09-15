@@ -4,7 +4,7 @@ import { Store } from "../Store";
 import { CartItem } from "../types/Cart";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
-import MessageBox from "../components/MessageBox";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMinusCircle,

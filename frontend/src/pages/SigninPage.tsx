@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import { useSigninMutation } from "../hooks/userHook";
 import { toast } from "react-toastify";
@@ -40,9 +40,9 @@ export default function SigninPage() {
     }
   }, [navigate, redirect, userInfo]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center h-full pt-[200px] bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold mb-6">Login</h2>
+        <h2 className="text-3xl font-semibold mb-6">Login</h2>
         <div className="mb-4">
           <label htmlFor="email" className="text-sm font-medium text-gray-600">
             E-mail
@@ -70,14 +70,14 @@ export default function SigninPage() {
             placeholder="Sua senha"
           />
         </div>
-        <button className="w-full py-2 text-white bg-indigo-500 hover:bg-indigo-600 rounded-md transition duration-300">
+        <button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition duration-300">
           Entrar
         </button>
         <p className="mt-4 text-sm text-gray-600">
           Novo por aqui?{" "}
-          <a href="/registro" className="text-indigo-500">
+          <Link to={`/signup?redirect=${redirect}`} className="text-blue-600">
             Crie uma conta agora
-          </a>
+          </Link>
           .
         </p>
       </div>

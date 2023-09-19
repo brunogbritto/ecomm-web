@@ -32,12 +32,12 @@ const Navbar = () => {
                 </div>
               )}
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/signin"
               className="text-gray-300 dark:text-slate-900 hover:text-white px-3 py-2"
             >
               Sign In
-            </a>
+            </Link>
           </div>
         </div>
       </div>

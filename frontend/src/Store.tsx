@@ -31,7 +31,8 @@ const initialState: AppState = {
 type Action =
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
-  | { type: "USER_SIGNIN"; payload: UserInfo };
+  | { type: "USER_SIGNIN"; payload: UserInfo }
+  | { type: "USER_SIGNOUT" };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -60,6 +61,25 @@ function reducer(state: AppState, action: Action): AppState {
 
     case "USER_SIGNIN":
       return { ...state, userInfo: action.payload };
+    case "USER_SIGNOUT":
+      return {
+        ...state,
+        cart: {
+          cartItems: [],
+          paymentMethod: "PayPal",
+          shippingAddress: {
+            fullName: "",
+            address: "",
+            postalCode: "",
+            city: "",
+            country: "",
+          },
+          itemsPrice: 0,
+          shippingPrice: 0,
+          taxPrice: 0,
+          totalPrice: 0,
+        },
+      };
 
     default:
       return state;

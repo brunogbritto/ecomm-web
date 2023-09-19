@@ -10,7 +10,7 @@ export type CartItem = {
 
 export type ShippingAddress = {
   fullName: string;
-  adress: string;
+  address: string;
   city: string;
   country: string;
   postalCode: string;

@@ -65,7 +65,7 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 bg-gray-800 text-slate-200 dark:text-gray-800 dark:bg-slate-200 rounded-md shadow-lg">
                     <Link
                       to="#signout"
-                      className="block px-4 py-2 text-slate-200 dark:text-slate-900 hover:bg-gray-100 dark:hover:bg-slate-100"
+                      className="block px-4 py-2 text-slate-300 dark:text-slate-900 hover:text-slate-100 dark:hover:bg-slate-100"
                       onClick={signoutHandler}
                     >
                       Logout

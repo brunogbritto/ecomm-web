@@ -5,6 +5,7 @@ import { useSignupMutation } from "../hooks/userHook";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
+import LoadingBox from "../components/LoadingBox";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -115,10 +116,11 @@ export default function SignupPage() {
           >
             Criar Conta
           </button>
+          {isLoading && <LoadingBox />}
         </Form>
         <p className="mt-4 text-sm text-gray-600">
           Já tem uma conta?{" "}
-          <Link to={`/signin?redirect=$`} className="text-blue-600">
+          <Link to={`/signin?redirect=${redirect}`} className="text-blue-600">
             Faça login
           </Link>
           .

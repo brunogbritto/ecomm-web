@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
@@ -60,7 +60,7 @@ export default function ShippingAddressPage() {
 
       <h1 className="text-2xl font-semibold mt-4">Shipping Address</h1>
 
-      <form onSubmit={submitHandler} className="mt-4 space-y-4">
+      <Form onSubmit={submitHandler} className="mt-4 space-y-4">
         <div>
           <label htmlFor="fullName" className="block font-medium">
             Full Name
@@ -141,7 +141,7 @@ export default function ShippingAddressPage() {
             Continue to Payment
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

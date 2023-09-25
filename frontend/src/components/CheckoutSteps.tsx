@@ -1,7 +1,3 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faCircle } from "@fortawesome/free-solid-svg-icons";
-
 export default function CheckoutSteps(props: {
   step1: boolean;
   step2: boolean;

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import LoadingBox from "../components/LoadingBox";
+import { Helmet } from "react-helmet-async";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -50,6 +51,9 @@ export default function SignupPage() {
   };
   return (
     <div className="flex flex-col items-center justify-center h-full pt-[200px] bg-gray-100">
+      <Helmet>
+        <title>Register | Brechola</title>
+      </Helmet>
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-3xl font-semibold mb-6">Crie sua conta</h2>
         <Form onSubmit={submitHandler}>

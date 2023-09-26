@@ -8,15 +8,14 @@ export default function ShippingAddressPage() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(Store);
   const {
-    userInfo,
     cart: { shippingAddress },
   } = state;
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/signin?redirect=/shipping");
-    }
-  }, [userInfo, navigate]);
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     navigate("/signin?redirect=/shipping");
+  //   }
+  // }, [userInfo, navigate]);
 
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
@@ -54,7 +53,7 @@ export default function ShippingAddressPage() {
   return (
     <div className="max-w-2xl mx-auto p-4">
       <Helmet>
-        <title>Shipping Address</title>
+        <title>Shipping Address | Brechola</title>
       </Helmet>
       <CheckoutSteps step1 step2 step3={false} step4={false} />
 

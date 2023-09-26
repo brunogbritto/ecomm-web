@@ -1,6 +1,6 @@
 import { Cart, CartItem, ShippingAddress } from "./types/Cart";
 import React from "react";
-import { UserInfo } from "./types/UserInfo";
+import { UserInfo } from "./types/User";
 
 type AppState = {
   cart: Cart;

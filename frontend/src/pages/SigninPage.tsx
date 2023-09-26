@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import LoadingBox from "../components/LoadingBox";
+import { Helmet } from "react-helmet-async";
 
 export default function SigninPage() {
   const navigate = useNavigate();
@@ -45,6 +46,9 @@ export default function SigninPage() {
       onSubmit={submitHandler}
       className="flex flex-col items-center justify-center h-full pt-[200px] bg-gray-100"
     >
+      <Helmet>
+        <title>Login | Brechola</title>
+      </Helmet>
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-3xl font-semibold mb-6">Login</h2>
         <div className="mb-4">

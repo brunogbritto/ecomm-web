@@ -40,7 +40,7 @@ export default function CartPage() {
   return (
     <div>
       <Helmet>
-        <title>Carrinho de compras</title>
+        <title>Carrinho de compras | Brechola</title>
       </Helmet>
 
       <div className="container flex flex-col items-start md:w-[800px] mx-auto">

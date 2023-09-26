@@ -48,7 +48,7 @@ export default function ProductPage() {
   ) : (
     <div className="flex justify-center items-center w-screen">
       <Helmet>
-        <title>{product.name}</title>
+        <title>{product.name} | Brechola</title>
       </Helmet>
       <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4 ">
         <div>

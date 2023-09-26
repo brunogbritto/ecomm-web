@@ -30,7 +30,7 @@ export default function PaymentMethodPage() {
   return (
     <div className="max-w-2xl mx-auto p-4">
       <Helmet>
-        <title>Payment Method</title>
+        <title>Payment Method | Brechola</title>
       </Helmet>
       <CheckoutSteps step1 step2 step3 step4={false}></CheckoutSteps>
       <h1 className="text-2xl font-semibold mt-4 mr-[250px]">Payment Method</h1>

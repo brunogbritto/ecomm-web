@@ -1,10 +1,10 @@
 import { Cart, CartItem, ShippingAddress } from "./types/Cart";
 import React from "react";
-import { UserInfo } from "./types/User";
+import { User } from "./types/User";
 
 type AppState = {
   cart: Cart;
-  userInfo?: UserInfo;
+  userInfo?: User;
 };
 
 const initialState: AppState = {
@@ -31,7 +31,8 @@ const initialState: AppState = {
 type Action =
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
-  | { type: "USER_SIGNIN"; payload: UserInfo }
+  | { type: "CART_CLEAR" }
+  | { type: "USER_SIGNIN"; payload: User }
   | { type: "USER_SIGNOUT" }
   | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
   | { type: "SAVE_PAYMENT_METHOD"; payload: string };
@@ -59,6 +60,9 @@ function reducer(state: AppState, action: Action): AppState {
       );
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "CART_CLEAR": {
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     }
 
     case "USER_SIGNIN":

@@ -7,7 +7,7 @@ export const useCreateOrderMutation = () =>
   useMutation({
     mutationFn: async (order: {
       orderItems: CartItem[];
-      shippingAddess: ShippingAddress;
+      shippingAddress: ShippingAddress;
       paymentMethod: string;
       itemsPrice: number;
       shippingPrice: number;

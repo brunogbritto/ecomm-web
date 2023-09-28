@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
@@ -63,42 +63,92 @@ export default function PlaceOrderPage() {
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Shipping Information</h2>
             <div className="bg-white rounded-lg shadow-md p-4 mt-4">
-              {/* Shipping address content goes here */}
+              <strong>Nome: </strong>
+              {cart.shippingAddress.fullName} <br />
+              <strong>Endereço: </strong>
+              {cart.shippingAddress.address},{cart.shippingAddress.city},{" "}
+              {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}{" "}
+              <br />
+              <div className="mt-1 text-blue-900">
+                <Link to="/shipping">Edit</Link>
+              </div>
             </div>
           </div>
 
           {/* Payment Information */}
           <div className="mt-8">
             <h2 className="text-xl font-semibold">Payment Information</h2>
-            {/* Payment details go here */}
+            <div className="bg-white rounded-lg shadow-md p-4 mt-4">
+              <strong>Method:</strong> {cart.paymentMethod}
+              <div className="mt-1 text-blue-900">
+                <Link to="/payment">Edit</Link>
+              </div>
+            </div>
           </div>
 
           {/* Order Items */}
           <div className="mt-8">
-            <h2 className="text-xl font-semibold">Order Items</h2>
+            <h2 className="text-xl font-semibold">Ordered Items</h2>
             <div className="bg-white rounded-lg shadow-md p-4 mt-4">
-              {/* List of ordered items goes here */}
+              {cart.cartItems.map((item) => (
+                <div key={item._id} className="flex mb-4 items-center">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="mr-4 w-[75px] h-[95px]"
+                  ></img>
+                  <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                </div>
+              ))}
+              <div className="text-blue-900">
+                <Link to="/cart">Edit</Link>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Coluna da Direita */}
-        <div className="w-[200px]">
+        <div className="w-[250px]">
           {/* Order Summary */}
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Order Summary</h2>
-            <div className="bg-white rounded-lg shadow-md p-4 mt-4">
-              {/* Order summary content goes here */}
+            <div className="bg-white rounded-lg p-4 mt-4 flex">
+              <ul className="list-none">
+                <li className="flex justify-between items-center">
+                  Preço itens:
+                </li>
+                <li className="flex justify-between items-center">Frete:</li>
+                <li className="flex justify-between items-center">Taxa:</li>
+                <li className="flex justify-between items-center mt-2">
+                  <strong>Total: </strong>
+                </li>
+              </ul>
+              <ul className="list-none">
+                <li className="flex justify-between items-center ml-5">
+                  ${cart.itemsPrice.toFixed(2)}
+                </li>
+                <li className="flex justify-between items-center ml-5">
+                  ${cart.shippingPrice.toFixed(2)}
+                </li>
+                <li className="flex justify-between items-center ml-5">
+                  ${cart.taxPrice.toFixed(2)}
+                </li>
+                <li className="flex justify-between items-center ml-5 mt-2">
+                  <strong>${cart.totalPrice.toFixed(2)}</strong>
+                </li>
+              </ul>
+            </div>
+            <div className="mt-2 pb-5 shadow-md">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                onClick={placeOrderHandler}
+              >
+                Place your order
+              </button>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Place Order Button */}
-      <div className="mt-8">
-        <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
-          Place Order
-        </button>
       </div>
     </div>
   );

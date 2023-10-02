@@ -9,6 +9,7 @@ export type Order = {
   user: User;
   createdAt: string;
   isPaid: boolean;
+  paidAt: string;
   isDelivered: boolean;
   deliveredAt: string;
   itemsPrice: number;

@@ -62,7 +62,7 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
                 </div>
                 {isDropdownVisible && (
-                  <div className="absolute right-0 mt-2 bg-gray-800 text-slate-200 dark:text-gray-800 dark:bg-slate-200 rounded-md shadow-lg">
+                  <div className="absolute w-[130px] right-0 mt-2 bg-gray-800 text-slate-200 dark:text-gray-800 dark:bg-slate-200 rounded-md shadow-lg">
                     <Link
                       to="/orderhistory"
                       className="block px-4 py-2 text-slate-300 dark:text-slate-900 hover:text-slate-100 dark:hover:bg-slate-100"

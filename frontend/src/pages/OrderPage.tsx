@@ -36,8 +36,8 @@ export default function OrderPage() {
   const { mutateAsync: payOrder, isLoading: loadingPay } =
     usePayOrderMutation();
 
-  const testPayHandler = () => {
-    payOrder({ orderId: orderId! });
+  const testPayHandler = async () => {
+    await payOrder({ orderId: orderId! });
     refetch();
     toast.success("Order is paid");
   };
@@ -82,7 +82,7 @@ export default function OrderPage() {
     onApprove(data, actions) {
       return actions.order!.capture().then(async (details) => {
         try {
-          payOrder({ orderId: orderId!, ...details });
+          await payOrder({ orderId: orderId!, ...details });
           refetch();
           toast.success("Order is paid successfully");
         } catch (err) {
@@ -213,7 +213,14 @@ export default function OrderPage() {
                     <PayPalButtons
                       {...paypalButtonTransactionProps}
                     ></PayPalButtons>
-                    <button onClick={testPayHandler}> Test Pay</button>
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                      onClick={testPayHandler}
+                    >
+                      {" "}
+                      Test Pay
+                    </button>
                   </div>
                 )}
               </div>
